@@ -2,6 +2,38 @@
   const root = document.documentElement;
   const elTheme = document.getElementById('toggleTheme');
 
+  // Demo Banner functionality
+  const demoBanner = document.getElementById('demoBanner');
+  const closeBannerBtn = document.getElementById('closeBanner');
+  
+  // Check if banner was previously dismissed
+  const bannerDismissed = localStorage.getItem('demoBannerDismissed') === 'true';
+  
+  if (bannerDismissed && demoBanner) {
+    demoBanner.style.display = 'none';
+  } else if (demoBanner) {
+    // Force a reflow to ensure backdrop-filter is applied during animation
+    setTimeout(() => {
+      const content = demoBanner.querySelector('.demo-banner-content');
+      if (content) {
+        content.style.backdropFilter = 'blur(12px) saturate(180%)';
+        content.style.webkitBackdropFilter = 'blur(12px) saturate(180%)';
+      }
+    }, 10);
+  }
+  
+  if (closeBannerBtn && demoBanner) {
+    closeBannerBtn.addEventListener('click', () => {
+      demoBanner.classList.add('banner-hidden');
+      localStorage.setItem('demoBannerDismissed', 'true');
+      
+      // Remove the banner from DOM after animation completes
+      setTimeout(() => {
+        demoBanner.style.display = 'none';
+      }, 300);
+    });
+  }
+
   // Set favicon based on current theme.
   function setFaviconByTheme(theme) {
     try {
