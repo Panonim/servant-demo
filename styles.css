@@ -957,3 +957,30 @@
     body.transitioning #toggleTheme img {
       transform: rotate(180deg);
     }
+
+    /* GitHub link button (reuses .btn styles) */
+    .github-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      padding: 10px 14px;
+      min-height: 40px;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .github-link:hover {
+      text-decoration: none;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .github-link img {
+      filter: invert(100%);
+      transition: filter 0.3s ease, transform 0.3s ease;
+    }
+  :root[data-theme="light"] .github-link img {
+      filter: invert(0%);
+    }
+    .github-link:hover img {
+      transform: scale(1.1);
+    }
